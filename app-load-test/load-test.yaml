@@ -10,6 +10,8 @@ spec:
       name: 'echoserver-load-test-script'
       file: 'load-test.js'
   runner:
+    image: mimi/k6
+    imagePullPolicy: IfNotPresent
     env:
       - name: MIMI_ENV
         valueFrom:
@@ -18,7 +20,7 @@ spec:
       - name: MIMI_ENV2
         value: "hello"
       - name: K6_STATSD_ADDR
-        value: "statsd-service.statsd.svc.cluster.local:8125"
+        value: "graphite.graphite.svc.cluster.local:8125"
       - name: K6_STATSD_NAMESPACE
         valueFrom:
           fieldRef:

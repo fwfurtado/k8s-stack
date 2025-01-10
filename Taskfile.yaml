@@ -37,3 +37,12 @@ tasks:
   k6:operator:delete:
     cmds:
       - helm uninstall k6-operator
+  graphite:deploy:
+    cmds:        
+      - helm repo add kiwigrid https://kiwigrid.github.io
+      - helm repo update
+      - helm install graphite kiwigrid/graphite --namespace graphite --create-namespace --values graphite/values.yaml
+  graphite:delete:
+    cmds:
+      - helm uninstall graphite
+      - kubectl delete namespace graphite
