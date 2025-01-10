@@ -3,13 +3,14 @@ import { sleep } from 'k6';
 
 export const options = {
   vus: 100,
-  duration: '3m',
+  duration: '30s',
 };
 
 
 export default function() {
-  http.get('http://localhost:8080');
+  http.get('http://echoserver.echoserver.svc.cluster.local');
   sleep(1);
+  console.log('Request sent');
 }
 
 

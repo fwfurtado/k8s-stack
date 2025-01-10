@@ -3,6 +3,8 @@ kind: TestRun
 metadata:
   name: echoserver-load-test
 spec:
+  parallelism: 1
   script:
     configMap:
       name: 'echoserver-load-test-script'
+      file: 'load-test.js'
