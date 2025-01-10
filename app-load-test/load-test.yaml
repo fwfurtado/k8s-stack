@@ -9,8 +9,7 @@ spec:
     configMap:
       name: 'echoserver-load-test-script'
       file: 'load-test.js'
-  arguments:
-    - --out output-statsd
+  arguments: --out output-statsd
   runner:
     image: mimi/k6
     imagePullPolicy: IfNotPresent
@@ -23,6 +22,8 @@ spec:
         value: "hello"
       - name: K6_STATSD_ADDR
         value: "graphite.graphite.svc.cluster.local:8125"
+      - name: K6_STATSD_ENABLE_TAGS
+        value: "true"
       - name: K6_STATSD_NAMESPACE
         valueFrom:
           fieldRef:
