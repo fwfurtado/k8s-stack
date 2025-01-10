@@ -4,7 +4,7 @@ metadata:
   name: echoserver-load-test
   namespace: echoserver
 spec:
-  parallelism: 10  
+  parallelism: 3
   script:
     configMap:
       name: 'echoserver-load-test-script'
