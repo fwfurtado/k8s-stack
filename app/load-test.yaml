@@ -16,4 +16,4 @@ spec:
       - name: MIMI_ENV
         valueFrom:
           fieldRef:
-            fieldPath: metadata.annotations['mimi']
+            fieldPath: metadata.name
