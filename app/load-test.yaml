@@ -4,7 +4,7 @@ metadata:
   name: echoserver-load-test
   namespace: echoserver
   annotations:
-    mimi.io/env: "hello"
+    mimi: "hello"
 spec:
   parallelism: 3
   script:
@@ -16,4 +16,4 @@ spec:
       - name: MIMI_ENV
         valueFrom:
           fieldRef:
-            fieldPath: metadata.annotations['mimi.io/env']
+            fieldPath: metadata.annotations['mimi']
