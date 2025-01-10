@@ -5,6 +5,7 @@ metadata:
   namespace: echoserver
 spec:
   parallelism: 1
+  cleanup: 'post'
   script:
     configMap:
       name: 'echoserver-load-test-script'

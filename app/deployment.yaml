@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: echoserver
+  name: echoserver-deployment
   namespace: echoserver
 spec:
   replicas: 5

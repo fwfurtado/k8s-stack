@@ -8,7 +8,7 @@ export const options = {
 
 
 export default function() {
-  http.get('http://echoserver.echoserver.svc.cluster.local');
+  http.get('http://echoserver-service.echoserver.svc.cluster.local');
   sleep(1);
   console.log('Request sent');
 }
