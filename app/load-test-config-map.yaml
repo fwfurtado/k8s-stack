@@ -22,7 +22,7 @@ data:
     }
 
     export function handleSummary(data) {
-      console.log('all env variables', JSON.stringify(__ENV));
+      console.log('MIMI ENV: ', __ENV.MIMI_ENV);
 
       const med_latency = data.metrics.iteration_duration.values.med;
       const latency_message = `The median latency was ${med_latency}\n`;
