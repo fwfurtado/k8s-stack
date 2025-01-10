@@ -3,6 +3,8 @@ kind: TestRun
 metadata:
   name: echoserver-load-test
   namespace: echoserver
+  annotations:
+    mimi.io/env: "hello"
 spec:
   parallelism: 3
   script:
@@ -12,4 +14,6 @@ spec:
   runner:
     env:
       - name: MIMI_ENV
-        value: "3"
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.annotations['mimi.io/env']
