@@ -9,3 +9,7 @@ spec:
     configMap:
       name: 'echoserver-load-test-script'
       file: 'load-test.js'
+  runner:
+    env:
+      - name: MIMI_ENV
+        value: "3"
