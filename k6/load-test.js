@@ -8,7 +8,7 @@ export const options = {
 
 
 export default function() {
-  http.get('http://echoserver.test-api.svc.cluster.local');
+  http.get('http://localhost:8080');
   sleep(1);
 }
 
