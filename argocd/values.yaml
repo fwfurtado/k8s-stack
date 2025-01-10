@@ -1,0 +1,9 @@
+global:
+  image:
+    tag: "v2.13.3"
+
+server:
+  service:
+    type: NodePort # ClusterIP
+  extraArgs:
+  - --insecure

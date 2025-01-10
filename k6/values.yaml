@@ -1,0 +1,4 @@
+# manager:
+#   env:
+#     - name: WATCH_NAMESPACE
+#       value: "some-namespace"

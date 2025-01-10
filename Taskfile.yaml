@@ -1,0 +1,39 @@
+version: "3"
+
+tasks:
+  minikube:start:
+    cmds:
+      - minikube start --nodes 2 --cpus 8 --memory 8g
+      - minikube addons enable ingress
+      - minikube addons enable ingress-dns
+  minikube:stop:
+    cmds:
+      - minikube stop
+  minikube:delete:
+    cmds:
+      - minikube delete
+  argocd:deploy:
+    cmds:
+      - helm repo add argo https://argoproj.github.io/argo-helm
+      - helm repo update
+      - helm install argocd argo/argo-cd --namespace argocd --create-namespace --values argocd/values.yaml
+      - kubectl apply -f argocd/ingress.yaml
+  argocd:delete:
+    cmds:
+      - helm uninstall argocd
+      - kubectl delete -f argocd/ingress.yaml
+      - kubectl delete namespace argocd
+  argocd:admin-password:
+    cmds:
+      - kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 -d
+  argocd:port-forward:
+    cmds:
+      - kubectl port-forward svc/argocd-server -n argocd 8080:80
+  k6:operator:deploy:
+    cmds:
+      - helm repo add grafana https://grafana.github.io/helm-charts
+      - helm repo update
+      - helm install k6-operator grafana/k6-operator
+  k6:operator:delete:
+    cmds:
+      - helm uninstall k6-operator
