@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:  
   name: echoserver-load-test-script
-  namespace: echoserver
+  namespace: echoserver-load-test
 data:
   load-test.js: |-
     import http from 'k6/http';

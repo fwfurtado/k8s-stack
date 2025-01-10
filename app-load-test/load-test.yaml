@@ -1,0 +1,25 @@
+apiVersion: k6.io/v1alpha1
+kind: TestRun
+metadata:
+  name: echoserver-load-test-run
+  namespace: echoserver-load-test
+spec:
+  parallelism: 3
+  script:
+    configMap:
+      name: 'echoserver-load-test-script'
+      file: 'load-test.js'
+  runner:
+    env:
+      - name: MIMI_ENV
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.name
+      - name: MIMI_ENV2
+        value: "hello"
+      - name: K6_STATSD_ADDR
+        value: "statsd-service.statsd.svc.cluster.local:8125"
+      - name: K6_STATSD_NAMESPACE
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.namespace
