@@ -2,6 +2,7 @@ apiVersion: k6.io/v1alpha1
 kind: TestRun
 metadata:
   name: echoserver-load-test
+  namespace: echoserver
 spec:
   parallelism: 1
   script:

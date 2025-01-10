@@ -15,7 +15,10 @@ export default function() {
 
 
 export function handleSummary(data) {
+  const med_latency = data.metrics.iteration_duration.values.med;
+  const latency_message = `The median latency was ${med_latency}\n`;
+
   return {
-    'summary.json': JSON.stringify(data), //the default data object
+    stdout: latency_message,
   };
 }
