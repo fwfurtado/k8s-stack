@@ -10,7 +10,7 @@ spec:
       name: 'echoserver-load-test-script'
       file: 'load-test.js'
   arguments:
-    - --out statsd
+    - --out output-statsd
   runner:
     image: mimi/k6
     imagePullPolicy: IfNotPresent
