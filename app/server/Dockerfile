@@ -1,6 +1,7 @@
 # Use a Rust base image with Cargo installed
-FROM rust:1.78.0 AS builder
+FROM rust:1.83.0 AS builder
 
+# Install build-essential cmake
 RUN apt-get update && apt-get install -y build-essential cmake
 
 # Set the working directory inside the container
@@ -16,10 +17,10 @@ COPY ./src ./src
 RUN cargo build --release
 
 # Start a new stage to create a smaller image without unnecessary build dependencies
-FROM debian:buster-slim
+FROM debian:bookworm-slim
 
 # Copy the built binary from the previous stage
 COPY --from=builder /usr/src/app/target/release/server /usr/local/bin/server
 
 # Command to run the application
-CMD ["./server"]
+CMD ["/usr/local/bin/server"]

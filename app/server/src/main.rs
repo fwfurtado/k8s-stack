@@ -32,6 +32,8 @@ fn main() {
     server.add_service(background);
     server.add_service(lb);
     server.run_forever();
+
+    println!("server started");
 }
 
 pub struct LB(Arc<LoadBalancer<RoundRobin>>);
@@ -95,6 +97,7 @@ impl ProxyHttp for LB {
     where
         Self::CTX: Send + Sync,
     {
+        println!("new request");
         let appid = match self.get_request_appid(session) {
             None => return Ok(false), // no client appid found, skip rate limiting
             Some(addr) => addr,

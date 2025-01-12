@@ -24,6 +24,8 @@ spec:
         value: "graphite.graphite.svc.cluster.local:8125"
       - name: K6_STATSD_ENABLE_TAGS
         value: "true"
+      - name: K6_STATSD_NAMESPACE
+        value: "mimi"
       # - name: K6_STATSD_NAMESPACE
       #   valueFrom:
       #     fieldRef:
