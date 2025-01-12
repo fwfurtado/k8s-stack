@@ -9,7 +9,7 @@ spec:
     configMap:
       name: 'echoserver-load-test-script'
       file: 'load-test.js'
-  arguments: --out output-statsd
+  arguments: -o output-statsd --verbose
   runner:
     image: mimi/k6
     imagePullPolicy: IfNotPresent
