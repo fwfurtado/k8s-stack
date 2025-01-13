@@ -42,7 +42,7 @@ spec:
     initContainers:
         - name: git-clone
           image: alpine/git
-          command: ["clone", "{{ .repository }}", "/tmp/repo"]
+          command: ["git", "clone", "{{ .repository }}", "/tmp/repo"]
           volumeMounts:
             - name: git-repo
               mountPath: /tmp/repo
