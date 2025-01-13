@@ -21,7 +21,7 @@ spec:
         - containerPort: {{ .Values.port | default 80 }}
         env:
         - name: PORT
-          value: {{ .Values.port | default 80 }}
+          value: {{ .Values.port | default 80  | quote}}
         resources:
           requests:
             memory: {{ .Values.resources.requests.memory | default "64Mi" }}
