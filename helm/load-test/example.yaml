@@ -1,4 +1,4 @@
-name: load testing
+name: load-testing
 namespace: load-test
 repository: https://github.com/fwfurtado/k8s-stack.git
 tests:

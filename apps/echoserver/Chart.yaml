@@ -1,0 +1,7 @@
+apiVersion: v2
+name: echoserver
+version: 0.1.0
+dependencies:
+  - name: app
+    repository: 'file://../../helm/app'
+    version: "0.1.0"
