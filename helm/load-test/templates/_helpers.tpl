@@ -12,5 +12,5 @@ Expand the name of the chart.
 
 
 {{- define "load-test.statsd" -}}
-{{- printf "%s:%s" .Values.statsd.host .Values.statsd.port | quote }}
+{{- printf "%s:%s" .Values.statsd.host (.Values.statsd.port | toString) | quote }}
 {{- end }}
