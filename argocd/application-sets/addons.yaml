@@ -18,9 +18,9 @@ spec:
     spec:
       project: "default"
       source:
-        repoURL: {{ helm.repoURL }}
-        chart: '{{ helm.chart }}'
-        targetRevision: {{ helm.version }}
+        repoURL: https://github.com/fwfurtado/k8s-stack.git
+        chart: 'cluster-addons/{{.path.basename}}'
+        targetRevision: HEAD
         helm:
           valueFiles:
           - values.yaml
