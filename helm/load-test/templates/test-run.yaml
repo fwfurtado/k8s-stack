@@ -1,0 +1,50 @@
+{{- $name := include "load-test.name" . }}
+{{- $namespace := include "load-test.namespace" . }}
+{{- $statsd := include "load-test.statsd" . }}
+{{- range .Values.tests -}}
+apiVersion: k6.io/v1alpha1
+kind: TestRun
+metadata:
+  name: {{ $name }}
+  namespace: {{ $namespace }}
+spec:
+  parallelism: {{ .parallelism }}
+  script:
+    localFile: /repo/{{ .script }}
+  arguments: -o output-statsd --verbose
+  runner:
+    image: mimi/k6
+    imagePullPolicy: IfNotPresent
+    env:      
+      - name: K6_STATSD_ADDR
+        value: {{ $statsd }}
+      - name: K6_STATSD_ENABLE_TAGS
+        value: "true"
+      - name: K6_STATSD_NAMESPACE
+        value: "{{ $namespace }}."
+      {{- range .envs }}
+      - name: {{ .name }}
+        value: {{ .value | quote }}
+      {{- end }}
+    volumes:
+    - name: git-repo
+      emptyDir: 
+        sizeLimit: 500Mi
+    readinessProbe:
+      exec:
+        command: ["test", "-f", "/repo/{{ .script }}"]
+        failureThreshold: 5
+        initialDelaySeconds: 10
+        periodSeconds: 10
+    volumeMounts:
+    - name: git-repo
+      mountPath: /repo    
+    initContainers:
+        - name: git-clone
+          image: alpine/git
+          command: ["clone", "{{ .repository }}", "/tmp/repo"]
+          volumeMounts:
+            - name: git-repo
+              mountPath: /tmp/repo
+
+{{- end -}}

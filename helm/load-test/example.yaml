@@ -1,0 +1,15 @@
+name: load testing
+namespace: load-test
+repository: https://github.com/fwfurtado/k8s-stack.git
+tests:
+  - name: echoserver-load-test
+    script: app-load-test/load-test.js
+    parallelism: 3
+    envs:
+      - name: MIMI_ENV
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.name
+statsd:
+  host: graphite.graphite.svc.cluster.local
+  port: 8125

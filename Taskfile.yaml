@@ -58,3 +58,27 @@ tasks:
   grafana:get-admin-password:
     cmds:
       - kubectl get secret --namespace grafana grafana -o jsonpath="{.data.admin-password}" | base64 --decode
+  terraform:argocd:plan:
+    internal: true
+    dir: terraform/
+    cmds:
+      - terraform init
+      - terraform plan
+  terraform:argocd:apply:
+    prompt: Apply argocd terraform?
+    internal: true
+    dir: terraform/
+    cmds:
+      - terraform init
+      - terraform apply -auto-approve
+  argocd:applicationset:
+    prompt: Apply argocd applicationset?  
+    dir: argocd/application-sets/
+    cmds:
+      - kubectl apply -n argocd -f addons.yaml
+      - kubectl apply -n argocd -f apps.yaml
+  deploy:stack:    
+    cmds:
+      - task: terraform:argocd:plan
+      - task: terraform:argocd:apply
+      # - task: argocd:applicationset

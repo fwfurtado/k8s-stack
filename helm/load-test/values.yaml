@@ -1,0 +1,3 @@
+statsd:
+  host: graphite.graphite.svc.cluster.local
+  port: 8125
