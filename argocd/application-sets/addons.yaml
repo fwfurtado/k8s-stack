@@ -19,7 +19,7 @@ spec:
       project: "default"
       source:
         repoURL: https://github.com/fwfurtado/k8s-stack.git
-        chart: 'cluster-addons/{{.path.basename}}'
+        path: './cluster-addons/{{.path.basename}}/'
         targetRevision: HEAD
         helm:
           valueFiles:
