@@ -1,0 +1,7 @@
+load-test:
+  name: echoserver-load-test  
+  repository: https://github.com/fwfurtado/k8s-stack.git
+  tests:
+    - name: echoserver-load-test
+      script: app-load-test/load-test.js
+      parallelism: 10    

@@ -1,0 +1,6 @@
+dependencies:
+- name: load-test
+  repository: file://../../helm/load-test
+  version: 0.1.0
+digest: sha256:2afc1a98f417f98672a3c5a391bf2bcdc41d6f0660287a60d32628300a22892c
+generated: "2025-01-13T16:10:29.000956017-03:00"
