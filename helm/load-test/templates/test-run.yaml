@@ -1,6 +1,7 @@
 {{- $name := include "load-test.name" . }}
 {{- $namespace := include "load-test.namespace" . }}
 {{- $statsd := include "load-test.statsd" . }}
+{{- $repository := .Values.repository }}
 {{- range .Values.tests -}}
 apiVersion: k6.io/v1alpha1
 kind: TestRun
@@ -42,7 +43,7 @@ spec:
     initContainers:
         - name: git-clone
           image: alpine/git
-          command: ["git", "clone", "{{ .repository }}", "/tmp/repo"]
+          command: ["git", "clone", "{{ $repository }}", "/tmp/repo"]
           volumeMounts:
             - name: git-repo
               mountPath: /tmp/repo
