@@ -82,3 +82,11 @@ tasks:
       - task: terraform:argocd:plan
       - task: terraform:argocd:apply
       # - task: argocd:applicationset
+  cluster:addons:update-dependencies:
+    vars:
+      CHARTS:
+        sh: find ./cluster-addons -type f -name Chart.yaml
+    cmds:
+      - for: { var: CHARTS }
+        cmd: helm dependency build {{ .ITEM | dir }}
+
