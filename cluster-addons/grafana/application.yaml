@@ -6,11 +6,13 @@ metadata:
 spec:
   project: default
   source:
-    chart: grafana/grafana
+    chart: grafana
     repoURL: https://grafana.github.io/helm-charts
     targetRevision: 1.16.1
     helm:
       releaseName: grafana
+      valueFiles:
+      - values.yaml
   destination:
     server: "https://kubernetes.default.svc"
     namespace: grafana
