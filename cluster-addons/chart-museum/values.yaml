@@ -1,0 +1,8 @@
+env:
+  open:
+    STORAGE: local
+persistence:
+  enabled: true
+  accessMode: ReadWriteOnce
+  size: 8Gi
+  storageClass: glusterfile

@@ -6,56 +6,17 @@ tasks:
       - minikube start --nodes 2 --cpus 8 --memory 8g
       - minikube addons enable ingress
       - minikube addons enable ingress-dns
+      - minikube addons enable storage-provisioner-gluster
   minikube:stop:
     cmds:
       - minikube stop
   minikube:delete:
     cmds:
       - minikube delete
-  argocd:deploy:
-    cmds:
-      - helm repo add argo https://argoproj.github.io/argo-helm
-      - helm repo update
-      - helm install argocd argo/argo-cd --namespace argocd --create-namespace --values argocd/values.yaml
-      - kubectl apply -f argocd/ingress.yaml
-  argocd:delete:
-    cmds:
-      - helm uninstall argocd
-      - kubectl delete -f argocd/ingress.yaml
-      - kubectl delete namespace argocd
-  argocd:admin-password:
+  password:argocd:
     cmds:
       - kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 -d
-  argocd:port-forward:
-    cmds:
-      - kubectl port-forward svc/argocd-server -n argocd 8080:80
-  k6:operator:deploy:
-    cmds:
-      - helm repo add grafana https://grafana.github.io/helm-charts
-      - helm repo update
-      - helm install k6-operator grafana/k6-operator
-  k6:operator:delete:
-    cmds:
-      - helm uninstall k6-operator
-  graphite:deploy:
-    cmds:        
-      - helm repo add kiwigrid https://kiwigrid.github.io
-      - helm repo update
-      - helm install graphite kiwigrid/graphite --namespace graphite --create-namespace --values graphite/values.yaml
-  graphite:delete:
-    cmds:
-      - helm uninstall graphite
-      - kubectl delete namespace graphite
-  grafana:deploy:
-    cmds:
-      - helm repo add grafana https://grafana.github.io/helm-charts
-      - helm repo update
-      - helm install grafana grafana/grafana --namespace grafana --create-namespace --values grafana/values.yaml
-  grafana:delete:
-    cmds:
-      - helm uninstall grafana
-      - kubectl delete namespace grafana
-  grafana:get-admin-password:
+  password:grafana:
     cmds:
       - kubectl get secret --namespace grafana grafana -o jsonpath="{.data.admin-password}" | base64 --decode
   terraform:argocd:plan:
@@ -72,6 +33,7 @@ tasks:
       - terraform init
       - terraform apply -auto-approve
   argocd:applicationset:
+    internal: true
     prompt: Apply argocd applicationset?  
     dir: argocd/application-sets/
     cmds:
@@ -81,11 +43,18 @@ tasks:
     cmds:
       - task: terraform:argocd:plan
       - task: terraform:argocd:apply
-      # - task: argocd:applicationset
-  cluster:addons:update-dependencies:
+      - task: argocd:applicationset
+  helm:dependencies:cluster-addons:  
     vars:
       CHARTS:
         sh: find ./cluster-addons -type f -name Chart.yaml
+    cmds:
+      - for: { var: CHARTS }
+        cmd: helm dependency build {{ .ITEM | dir }}
+  helm:dependencies:apps:
+    vars:
+      CHARTS:
+        sh: find ./apps -type f -name Chart.yaml
     cmds:
       - for: { var: CHARTS }
         cmd: helm dependency build {{ .ITEM | dir }}

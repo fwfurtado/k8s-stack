@@ -1,0 +1,11 @@
+env:
+  open:
+    AWS_SDK_LOAD_CONFIG: true
+    STORAGE: amazon
+    STORAGE_AMAZON_BUCKET: my-s3-bucket
+    STORAGE_AMAZON_PREFIX:
+    STORAGE_AMAZON_REGION: us-east-1
+serviceAccount:
+  create: true
+  annotations:
+    eks.amazonaws.com/role-arn: "arn:aws:iam::{aws account ID}:role/{assumed role name}"
