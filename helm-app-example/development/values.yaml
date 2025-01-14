@@ -1,5 +1,5 @@
 name: "echoserver"
-replicas: 5
+replicas: 1
 port: 80
 image:
   name: "ealen/echo-server"
