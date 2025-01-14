@@ -4,4 +4,4 @@ version: 0.1.0
 dependencies:
   - name: app
     repository: http://localhost:8080
-    version: "0.2.0"
+    version: "0.3.0"

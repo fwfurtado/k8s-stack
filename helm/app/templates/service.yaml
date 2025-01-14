@@ -6,8 +6,8 @@ metadata:
 spec:
   ports:
     - port: {{ .Values.port | default 80 }}
-      targetPort: {{ .Values.port | default 80 }}
+      targetPort: {{ .Values.targetPort | default .Values.port | default 80 }}
       protocol: TCP
-  type: ClusterIP
+  type: {{ .Values.type | default "ClusterIP" }}
   selector:
     app: {{ .Values.name }}
