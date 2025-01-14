@@ -17,7 +17,12 @@ spec:
   - repoURL: https://github.com/fwfurtado/k8s-stack.git
     targetRevision: HEAD
     ref: values
-    
+
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    - ApplyOutOfSyncOnly=true
+
   destination:
     server: https://kubernetes.default.svc
     namespace: own-helm-repository-example-production

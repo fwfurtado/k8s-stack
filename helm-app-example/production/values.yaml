@@ -2,5 +2,5 @@ name: "echoserver"
 replicas: 5
 port: 80
 image:
-  name: "ealen/echo-server"
+  name: "ealen/echo-server:0.8.16"
   pullPolicy: IfNotPresent
