@@ -1,9 +1,10 @@
-env:
-  open:
-    STORAGE: local
-    DISABLE_API: false
-persistence:
-  enabled: true
-  accessMode: ReadWriteOnce
-  size: 8Gi
-  storageClass: glusterfile
+chartmuseum:
+  env:
+    open:
+      STORAGE: local
+      DISABLE_API: false
+  persistence:
+    enabled: true
+    accessMode: ReadWriteOnce
+    size: 8Gi
+    storageClass: glusterfile

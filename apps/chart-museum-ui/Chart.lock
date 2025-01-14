@@ -1,0 +1,6 @@
+dependencies:
+- name: app
+  repository: http://localhost:8080
+  version: 0.2.0
+digest: sha256:7a0116d08edb4b3133fa7eeba9a04067a073e3ee5c23d0f5a1b0e469668849bf
+generated: "2025-01-13T22:11:45.564162426-03:00"

@@ -1,0 +1,10 @@
+app:
+  name: chart-museum-ui
+  replicas: 1
+  port: 8080
+  image:
+    name: "idobry/chartmuseumui"
+    pullPolicy: IfNotPresent
+  env:
+    - name: CHARTMUSEUM_URL
+      value: http://chart-museum-chartmuseum.chart-museum.svc.cluster.local:8080
