@@ -2,7 +2,7 @@ app:
   name: chart-museum-ui
   replicas: 1
   port: 8080
-  targetPort: 30180
+  nodePort: 30180
   type: NodePort
   image:
     name: "idobry/chartmuseumui"

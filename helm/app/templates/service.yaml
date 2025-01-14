@@ -8,6 +8,9 @@ spec:
     - port: {{ .Values.port | default 80 }}
       targetPort: {{ .Values.targetPort | default .Values.port | default 80 }}
       protocol: TCP
+      {{- if eq .Values.type "NodePort" }}
+      nodePort: {{ required "nodePort is required" .Values.nodePort }}
+      {{- end }}
   type: {{ .Values.type | default "ClusterIP" }}
   selector:
     app: {{ .Values.name }}
