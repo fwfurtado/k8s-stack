@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   sources:
-  - repoURL: 'http://api.chart-museum.svc.cluster.local:8080'
+  - repoURL: http://api.chart-museum.svc.cluster.local:8080
     chart: app
     targetRevision: 0.1.0
     helm:
@@ -16,7 +16,9 @@ spec:
   - repoURL: https://github.com/fwfurtado/k8s-stack.git
     targetRevision: HEAD
     ref: values
-
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
   destination:
     server: https://kubernetes.default.svc
     namespace: own-helm-repository-example-development
