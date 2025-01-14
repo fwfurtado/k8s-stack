@@ -1,4 +1,6 @@
 chartmuseum:
+  service:
+    servicename: "api"
   env:
     open:
       STORAGE: local
