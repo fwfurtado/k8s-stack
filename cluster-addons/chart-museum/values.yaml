@@ -9,4 +9,4 @@ chartmuseum:
     enabled: true
     accessMode: ReadWriteOnce
     size: 8Gi
-    storageClass: glusterfile
+    # storageClass: glusterfile
