@@ -11,4 +11,4 @@ chartmuseum:
     size: 8Gi
     # storageClass: glusterfile
   securityContext:
-    enable: false
+    enabled: false
