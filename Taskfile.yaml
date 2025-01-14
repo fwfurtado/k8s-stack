@@ -6,7 +6,7 @@ tasks:
       - minikube start --nodes 2 --cpus 8 --memory 8g
       - minikube addons enable ingress
       - minikube addons enable ingress-dns
-      - minikube addons enable storage-provisioner-gluster
+      # - minikube addons enable storage-provisioner-gluster
   minikube:stop:
     cmds:
       - minikube stop

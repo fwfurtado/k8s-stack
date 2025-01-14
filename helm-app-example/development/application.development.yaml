@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: own-helm-repository-example-development
+  namespace: argocd
+spec:
+  project: default
+  sources:
+  - repoURL: 'http://api.chart-museum.svc.cluster.local:8080'
+    chart: app
+    targetRevision: 0.1.0
+    helm:
+      valueFiles:
+      - $values/helm-app-example/development/values.yaml
+
+  - repoURL: https://github.com/fwfurtado/k8s-stack.git
+    targetRevision: HEAD
+    ref: values
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: own-helm-repository-example-development

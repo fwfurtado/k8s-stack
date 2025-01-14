@@ -1,0 +1,7 @@
+app:
+  name: echoserver
+  replicas: 5
+  port: 80
+  image:
+    name: ealen/echo-server
+    pullPolicy: IfNotPresent
